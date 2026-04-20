@@ -1,13 +1,15 @@
 package com.praktikumdb.deploy7.service;
 
 import com.praktikumdb.deploy7.model.User;
+
 import com.praktikumdb.deploy7.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class UserService {
-
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -23,7 +25,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(String id) {
+    public User getUserById(String id){
         return userRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +35,6 @@ public class UserService {
             existingUser.setName(request.getName());
             existingUser.setNim(request.getNim());
             return userRepository.save(existingUser);
-
         }
         return null;
     }
@@ -41,5 +42,4 @@ public class UserService {
     public void deleteUser(String id) {
         userRepository.deleteById(id);
     }
-
 }
